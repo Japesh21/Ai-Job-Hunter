@@ -1,0 +1,28 @@
+{
+  "target_companies": [
+    "Google",
+    "Meta",
+    "Amazon",
+    "Microsoft",
+    "Apple",
+    "Shopify",
+    "Stripe",
+    "OpenAI",
+    "Anthropic",
+    "Cohere"
+  ],
+  "target_locations": [
+    "Toronto, ON",
+    "Vancouver, BC",
+    "Remote",
+    "Canada"
+  ],
+  "target_roles": [
+    "Data Scientist",
+    "Machine Learning Engineer",
+    "AI Engineer",
+    "Data Analyst",
+    "Backend Engineer",
+    "Software Engineer"
+  ]
+}

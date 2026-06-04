@@ -1,0 +1,29 @@
+{
+  "blocked_companies": [],
+  "blocked_keywords": [
+    "unpaid",
+    "unpaid internship",
+    "commission only",
+    "commission-only",
+    "mlm",
+    "multi-level marketing",
+    "multi level marketing",
+    "network marketing",
+    "security deposit",
+    "requires own laptop",
+    "bring your own device",
+    "no salary",
+    "stipend only",
+    "equity only",
+    "volunteer",
+    "no pay"
+  ],
+  "min_salary": 0,
+  "max_salary": 0,
+  "_notes": {
+    "blocked_companies": "Add company names here to never see their jobs again. e.g. ['SpamAgency Pvt Ltd']",
+    "blocked_keywords": "If any of these appear in the job title OR description, the job is blocked",
+    "min_salary": "Set to 0 to disable. Monthly INR e.g. 15000",
+    "max_salary": "Set to 0 to disable"
+  }
+}
