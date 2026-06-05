@@ -102,7 +102,7 @@ def run_email():
 
     # Read actual counts from DB so this works even when called standalone
     jobs_in_db  = len(get_active_jobs())
-    top_jobs    = [dict(j) for j in get_top_matches(limit=50)]
+    top_jobs    = [dict(j) for j in get_top_matches(limit=1000)]
     applied_ids = {a["job_id"] for a in get_applications()}
 
     ok = send_daily_report(
