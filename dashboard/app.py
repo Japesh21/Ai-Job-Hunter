@@ -123,6 +123,23 @@ with st.sidebar:
             st.code(result.stderr[-400:] if result.stderr else result.stdout[-400:])
 
     st.divider()
+    st.markdown("**📄 Resume**")
+    resume_dir = os.path.join(PROJECT_ROOT, "data", "resumes")
+    existing = [f for f in os.listdir(resume_dir) if f.endswith(".pdf")] if os.path.isdir(resume_dir) else []
+    if existing:
+        st.caption(f"✅ {existing[0]}")
+    else:
+        st.caption("⚠️ No resume uploaded yet")
+    uploaded = st.file_uploader("Upload resume PDF", type="pdf", label_visibility="collapsed")
+    if uploaded:
+        os.makedirs(resume_dir, exist_ok=True)
+        save_path = os.path.join(resume_dir, uploaded.name)
+        with open(save_path, "wb") as f:
+            f.write(uploaded.getbuffer())
+        st.success(f"Saved: {uploaded.name}")
+        st.rerun()
+
+    st.divider()
     st.markdown("**🚫 Block a company**")
     block_company = st.text_input(
         "Company name", placeholder="e.g. SpamAgency Pvt Ltd",
