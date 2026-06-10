@@ -21,6 +21,7 @@ numpy==1.26.2
 
 # Scheduling
 apscheduler==3.10.4
+schedule==1.2.1
 
 # Dashboard
 streamlit==1.29.0
