@@ -247,7 +247,7 @@ if page == "🔍 Job Matches":
                 posted = time_ago(job.get("posted_at") or "")
                 city   = job.get("city") or job.get("location") or "—"
 
-                with st.container(border=True):
+                with st.container():
                     c1, c2, c3 = st.columns([5, 2, 1])
 
                     with c1:
@@ -307,7 +307,7 @@ elif page == "📋 Applied Jobs":
 
         for app in shown:
             color, emoji = STATUS_COLORS.get(app["status"], ("#6b7280", "⚪"))
-            with st.container(border=True):
+            with st.container():
                 c1, c2, c3 = st.columns([5, 2, 2])
 
                 with c1:
