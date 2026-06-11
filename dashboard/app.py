@@ -19,7 +19,11 @@ st.set_page_config(
     layout="wide",
 )
 
-init_db()
+@st.cache_resource
+def _init_db_once():
+    init_db()
+
+_init_db_once()
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
