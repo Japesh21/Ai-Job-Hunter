@@ -30,6 +30,7 @@ def send_email(subject: str, body_html: str, to: str = None) -> bool:
         return True
     except Exception as exc:
         logger.error("Failed to send email: %s", exc)
+        print(f"EMAIL ERROR: {exc}", flush=True)
         return False
 
 

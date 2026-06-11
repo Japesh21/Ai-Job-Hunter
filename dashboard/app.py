@@ -116,11 +116,12 @@ with st.sidebar:
                 [sys.executable, "main.py", "email"],
                 capture_output=True, text=True, cwd=PROJECT_ROOT,
             )
-        if result.returncode == 0:
+        output = (result.stdout or "") + (result.stderr or "")
+        if "Email sent" in output:
             st.success("Email sent to japeshmohan@gmail.com!")
         else:
-            st.error("Email failed:")
-            st.code(result.stderr[-400:] if result.stderr else result.stdout[-400:])
+            st.error("Email failed — see details:")
+            st.code(output[-600:])
 
     st.divider()
     st.markdown("**📄 Resume**")
