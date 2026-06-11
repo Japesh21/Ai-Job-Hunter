@@ -1,5 +1,6 @@
 import smtplib
 import logging
+import html as _html
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
@@ -35,13 +36,13 @@ def send_email(subject: str, body_html: str, to: str = None) -> bool:
 
 
 def _build_job_row(job: dict, top_score: float) -> str:
-    pct       = int((job["score"] / top_score) * 100)
+    pct       = min(100, int((job["score"] / top_score) * 100))
     bar_color = "#10b981" if pct >= 70 else "#3b82f6" if pct >= 40 else "#f59e0b"
-    city      = job.get("city") or job.get("location") or "India"
-    company   = job.get("company") or "—"
+    city      = _html.escape(job.get("city") or job.get("location") or "India")
+    company   = _html.escape(job.get("company") or "—")
     url       = job.get("url") or "#"
-    title     = job.get("title") or "—"
-    source    = (job.get("source") or "").capitalize()
+    title     = _html.escape(job.get("title") or "—")
+    source    = _html.escape((job.get("source") or "").capitalize())
     jtype     = job.get("job_type") or ""
     type_tag  = "🎓" if jtype == "internship" else "💼"
 

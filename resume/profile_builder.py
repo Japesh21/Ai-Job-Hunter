@@ -2,12 +2,13 @@
 
 from resume.resume_parser import extract_resume_text
 from resume.skill_extractor import extract_skills
+from config.settings import RESUME_DIR
 
 def build_profile():
-
-    text = extract_resume_text(
-        "data/resumes/Resume_Japeshmohan.pdf"
-    )
+    pdfs = list(RESUME_DIR.glob("*.pdf"))
+    if not pdfs:
+        raise FileNotFoundError(f"No resume PDF found in {RESUME_DIR}")
+    text = extract_resume_text(str(pdfs[0]))
 
     skills = extract_skills(text)
     skills.extend([

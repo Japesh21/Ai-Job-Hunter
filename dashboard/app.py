@@ -125,7 +125,8 @@ with st.sidebar:
 
     st.divider()
     st.markdown("**📄 Resume**")
-    resume_dir = os.path.join(PROJECT_ROOT, "data", "resumes")
+    from config.settings import RESUME_DIR
+    resume_dir = str(RESUME_DIR)
     existing = [f for f in os.listdir(resume_dir) if f.endswith(".pdf")] if os.path.isdir(resume_dir) else []
     if existing:
         st.caption(f"✅ {existing[0]}")
@@ -171,7 +172,7 @@ for j in _raw_matches:
 all_apps    = [dict(a) for a in get_applications()]
 applied_ids = {a["job_id"] for a in all_apps}
 
-top_score = all_matches[0]["score"] if all_matches else 1.0
+top_score = max((j["score"] for j in all_matches), default=1.0)
 if top_score == 0:
     top_score = 1.0
 
@@ -227,7 +228,7 @@ if page == "🔍 Job Matches":
         if city_filter:
             filtered = [j for j in filtered if (j.get("city") or "Unknown") in city_filter]
         if min_pct > 0:
-            filtered = [j for j in filtered if int((j["score"] / top_score) * 100) >= min_pct]
+            filtered = [j for j in filtered if min(100, int((j["score"] / top_score) * 100)) >= min_pct]
         if source_filter != "All":
             filtered = [j for j in filtered if j.get("source") == SOURCE_MAP.get(source_filter)]
         if type_filter == "Internship":
@@ -242,7 +243,7 @@ if page == "🔍 Job Matches":
             st.info("No jobs match your filters.")
         else:
             for job in filtered:
-                pct    = int((job["score"] / top_score) * 100)
+                pct    = min(100, int((job["score"] / top_score) * 100))
                 src    = source_badge(job.get("source") or "")
                 typ    = type_badge(job.get("job_type") or "")
                 posted = time_ago(job.get("posted_at") or "")
@@ -416,7 +417,7 @@ elif page == "📊 Stats":
     # Match score distribution
     if all_matches:
         st.subheader("Match score distribution")
-        scores = [int((j["score"] / top_score) * 100) for j in all_matches]
+        scores = [min(100, int((j["score"] / top_score) * 100)) for j in all_matches]
         df_scores = pd.DataFrame({"Match %": scores})
         st.bar_chart(df_scores["Match %"].value_counts().sort_index())
 

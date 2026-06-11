@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Ensure DB is initialised before anything else starts
+python -c "from database.connection import init_db; init_db()"
+
 # Start scheduler in background (runs daily at 8 AM)
 python main.py schedule &
 

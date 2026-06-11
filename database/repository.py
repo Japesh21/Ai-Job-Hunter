@@ -19,6 +19,8 @@ def upsert_job(job: dict) -> None:
             city        = excluded.city,
             job_type    = excluded.job_type,
             description = excluded.description,
+            url         = excluded.url,
+            source      = excluded.source,
             salary_min  = excluded.salary_min,
             salary_max  = excluded.salary_max,
             is_active   = 1
@@ -96,7 +98,7 @@ def delete_application(app_id: int) -> None:
 
 def get_applications(status: str = None) -> list[sqlite3.Row]:
     base = """
-        SELECT a.*, j.title, j.company, j.location, j.city, j.url, j.source, j.job_type, j.salary_min, j.posted_at as job_posted_at
+        SELECT a.*, j.title, j.company, j.location, j.city, j.url, j.source, j.job_type, j.salary_min, j.salary_max, j.posted_at as job_posted_at
         FROM applications a
         JOIN jobs j ON j.id = a.job_id
     """
