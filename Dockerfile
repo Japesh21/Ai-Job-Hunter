@@ -29,7 +29,7 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r re
 # Install Playwright's bundled Chromium
 RUN playwright install chromium
 
-# Copy source
+# Copy source (cache bust: v2)
 COPY . .
 
 # Create data dirs
